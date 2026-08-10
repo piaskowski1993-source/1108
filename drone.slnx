@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="drone.Tests/drone.Tests.csproj" />
+  <Project Path="drone/drone.csproj" />
+</Solution>
