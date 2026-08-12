@@ -7,6 +7,10 @@ public static class DroneAsyncWorker
         for (int checkpoint = 0; checkpoint <= drone.MaxCheckpoints; checkpoint++)
         {
             Console.WriteLine($"[{drone.Name}] checkpoint {checkpoint}/{drone.MaxCheckpoints}");
+            if (drone.Name == "Charlie" && checkpoint == 2)
+            {
+                throw new InvalidOperationException ($"[{drone.Name}] engine failure at checkpoint {checkpoint}");
+            }
             if (checkpoint < drone.MaxCheckpoints)
             {
                 await Task .Delay(drone.DelayMs);
