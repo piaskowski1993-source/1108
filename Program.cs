@@ -1,14 +1,15 @@
-﻿using System.Threading;
-using drone;
-using drone.ThreadRace;
+﻿using drone;
+using drone.AsyncFlow;
 
-var alpha = new DroneModel ("Alpha", maxCheckpoints : 5, delayMs: 300);
-var bravo = new DroneModel ("Bravo", maxCheckpoints :5, delayMs: 300);
+var alpha = new DroneModel("Alpha", maxCheckpoints: 5, delayMs: 300);
+var bravo = new DroneModel("Bravo", maxCheckpoints: 5, delayMs: 300);
 
-var threadAlpha = new Thread (() => DroneThreadWorker.Fly(alpha));
-var threadBravo = new Thread (() => DroneThreadWorker.Fly(bravo));
-
-threadAlpha.Start();
-threadBravo.Start();
-
-Console.WriteLine("All drones finished.");
+try
+{
+    await Task .WhenAll( DroneAsyncWorker.FlyAsync(alpha), DroneAsyncWorker.FlyAsync(bravo));
+    Console.WriteLine("All drones finished");
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Flight orchestrationf failed :{ex.Message}");
+}
