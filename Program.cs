@@ -11,6 +11,4 @@ var threadBravo = new Thread (() => DroneThreadWorker.Fly(bravo));
 threadAlpha.Start();
 threadBravo.Start();
 
-threadAlpha.Join();
-threadBravo.Join();
 Console.WriteLine("All drones finished.");
