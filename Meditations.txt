@@ -1,0 +1,15 @@
+>Del A
+- Two drones, each on a Thread, Threads sleep between checkpoints.
+- Unpredictible, Alpha should start but it varies between runs.
+- Removing join(), "All drones finished" printed before drones started.
+- Thread objects are foreground threads by default, the process stays ON as long ass they runb even after main() returns
+
+>Del B
+- 'Await Task.Delay' instead of 'Thread.Sleep' and 'await Task.WhenAll()' instead of 'Join()' calls,
+- Predictible start, alpha always logs the start before bravo is called. It becomes unpredictible afterwards.
+- 'Task.WhenAll' waits for every task to be finished doesn't matter if the children succeeded or failed,
+
+>A vs B
+- Unhandled exception inside A crashes the process, inside 'Task' it is handled by 'try/carch'
+- less boilerplate. 'WhenAll()' + 'try/catch' does perform better here then chaining 'Join()' and using 'Thread'/'Start'.
+- Using 'Thread.Sleep' slows down the process and hogs threads that could be used for other tasks. 
